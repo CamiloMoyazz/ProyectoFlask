@@ -1,0 +1,46 @@
+Lo primero que debemos hacer es entrar a la carpeta en la que deseamos instalar VENV
+luego escribimos el siguiente comando   
+ C:\Users\d\Workspace\intro-flask> py -3 -m venv nombre-env
+
+luego entramos a esa carpeta para activar el entorno
+C:\Users\d\Workspace\intro-flask> tutorial-env\Scripts\activate.bat
+
+luego instalamos flask
+(nombre-env)C:\Users\d\Workspace\intro-flask> pip3 install Flask
+luego hay que cargar flask en el archivo que queramos 
+(tutorial-env) C:\Users\d\Workspace\intro-flask> set FLASK_APP=nombreArchivo.AlgunLenguaje(hola.py)
+Luego Activamos Development en Enviroment:
+
+(tutorial-env) C:\Users\d\Workspace\intro-flask> set FLASK_ENV=development
+
+Luego Activamos el Debug:
+
+(tutorial-env) C:\Users\d\Workspace\intro-flask> set FLASK_DEBUG=on
+
+Y finalmente Corremos flask run:
+
+(tutorial-env) C:\Users\d\Workspace\intro-flask> flask run
+
+
+Creacion de plantilla para correr FLASK
+
+import os
+
+from flask import flask
+
+def create_app():
+    app = Flask(__name__)
+
+    app.config.from_mapping(
+        SECRET_KEY ='mikey',//(aqui podemos poner una coockie )
+        DATABASE_HOST=os.environ.get('FLASK_DATABASE_HOST'),
+        DATABASE_PASSWORD=os.environ.get('FLASK_DATABASE_PASSWORD'),
+        DATABASE_USER=os.environ.get('FLASK_DATABASE_USER'),
+        DATABASE=os.environ.get('FLASK_DATABASE')
+    )
+
+    @app.route('/hola')
+    def hola():
+        return 'Hola! Mundo!'
+
+    return app
