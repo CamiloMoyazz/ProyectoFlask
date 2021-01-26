@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MoyazzDevelopment</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <nav>
+        <h1 class="title">MoyazzDevelopment</h1>
+
+        <ul class="user">
+            {% if g.user %}
+                <li><span>{{ g.user['username']}}</span></li>
+                <li><a href="{{ url_for('auth.logout') }}">Cerrar Sesion</a></li>
+            {% else %}
+                <li><a href="{{ url_for('auth.register') }}">Registrarse</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Iniciar Sesion</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <div class="todo">
+        <ul></ul>
+    </div>
+<section class="content">
+    <header>
+
+    </header>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</section>
+</body>
+</html>
